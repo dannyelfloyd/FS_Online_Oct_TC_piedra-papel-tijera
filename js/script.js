@@ -1,4 +1,5 @@
 const opciones = ['piedra','papel','tijera'];
+const opcionesIconos = ['🪨','🗞️','✂️'];
 let contadorUsuario = document.getElementById('contador-usuario');
 let contadorMaquina = document.getElementById('contador-ordenador');
 let resultados = document.getElementById('resultados');
@@ -6,39 +7,20 @@ let botones = document.querySelectorAll('.boton-jugada');
 
 let puntosUsuario = 0;
 let puntosMaquina = 0;
-let resultado;
 
 botones.forEach(boton => {boton.addEventListener('click', iniciar)});
-  
-function iniciar () {
-  obtenerEleccion ()/*
-  const eleccionUsurio = obtenerEleccion (); 
-  const eleccionMaquina = obtenerAleatoriedad ();
-  const resultado = obtenerResultado(eleccionUsurio, eleccionMaquina);
-  mostrarResultado (resultado);
-  actualizarPuntuación ()*/
+
+function iniciar (e) { 
+  const eleccionUsurio = obtenerEleccion (e); 
+  const eleccionMaquina = obtenerAleatoriedad (); 
+  obtenerResultado(eleccionUsurio, eleccionMaquina);
 }
 
-function obtenerEleccion () {
-  let botonPiedra = document.querySelectorAll('.boton-jugada')[0];
-  let botonPapel = document.querySelectorAll('.boton-jugada')[1];
-  let botonTijera = document.querySelectorAll('.boton-jugada')[2];
-  
-  if (botones === botonPiedra) {
-    alert('piedra');
-  } else if (botones === botonPapel) {
-    alert('papel');
-  } else if (botones === botonTijera) {
-    alert('tijera');
-  }
-/*
-  if (botones.dataset.jugada === 'piedra') {
-    alert('piedra');
-  } else if (botones.dataset.jugada === 'papel') {
-    alert('papel');
-  } else if (botones.dataset.jugada === 'tijera') {
-    alert('tijera');
-  }*/
+function obtenerEleccion (e) {
+  botones.forEach(function (boton) {
+    if (e.currentTarget.dataset.jugada == boton.dataset.jugada) {} 
+  });
+  return e.currentTarget.dataset.jugada;
 }
 
 function obtenerAleatoriedad () {
@@ -55,35 +37,25 @@ function obtenerAleatoriedad () {
 
 function obtenerResultado (eleccionUsurio, eleccionMaquina) {
   if (eleccionUsurio === eleccionMaquina) {
-    result = 'Empate. Ambos elijieron'+ eleccionUsurio
+    mostrarResultado (String='Has empatado')
   } else if (
       (eleccionUsurio === 'piedra' && eleccionMaquina === 'tijera') || 
       (eleccionUsurio === 'papel' && eleccionMaquina === 'piedra') || 
       (eleccionUsurio === 'tijera' && eleccionMaquina === 'papel') 
     ){
-      result = 'Ganaste'+ eleccionUsurio + ' gana a ' + eleccionMaquina
-      puntosUsuario++
+      mostrarResultado (String='Has ganado')
+      actualizarPuntuacion (puntosUsuario++)
   } else {
-    result = 'Perdiste.'+ eleccionMaquina + ' gana a ' + eleccionUsurio
-    puntosMaquina++
+      mostrarResultado (String='Has perdido')
+      actualizarPuntuacion (puntosMaquina++)
   }
 }
 
-function mostrarResultado () {
-  switch (resultado) {
-    case gana:
-      resultado.innerHTML = 'Has ganado';
-      break;
-    case pierde:
-      resultado.innerHTML ='Has perdido';
-      break;
-    case empata:
-      resultado.innerHTML ='Has empatado';
-      break;
-  }
+function mostrarResultado (String) {
+  resultados.innerHTML = String;
 }
 
-function actualizarPuntuación () { 
+function actualizarPuntuacion () { 
   contadorUsuario.textContent = 'Puntos de la máquina: ' + puntosUsuario;
   contadorMaquina.textContent = 'Tus puntos: ' + puntosMaquina;
 }
