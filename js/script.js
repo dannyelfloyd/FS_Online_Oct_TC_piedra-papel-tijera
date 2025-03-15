@@ -1,12 +1,11 @@
 const opciones = ['piedra','papel','tijera'];
 const opcionesIconos = ['🪨','🗞️','✂️'];
-let contadorUsuario = document.getElementById('contador-usuario');
-let contadorMaquina = document.getElementById('contador-ordenador');
-let resultados = document.getElementById('resultados');
-let botones = document.querySelectorAll('.boton-jugada');
-
 let puntosUsuario = 0;
 let puntosMaquina = 0;
+let botones = document.querySelectorAll('.boton-jugada');
+let resultados = document.getElementById('resultados');
+let contadorUsuario = document.getElementById('contador-usuario');
+let contadorMaquina = document.getElementById('contador-ordenador');
 
 botones.forEach(boton => {boton.addEventListener('click', iniciar)});
 
@@ -37,25 +36,29 @@ function obtenerAleatoriedad () {
 
 function obtenerResultado (eleccionUsurio, eleccionMaquina) {
   if (eleccionUsurio === eleccionMaquina) {
-    mostrarResultado (String='Has empatado')
+    mostrarResultado (String='Has empatado 🤝')
   } else if (
       (eleccionUsurio === 'piedra' && eleccionMaquina === 'tijera') || 
       (eleccionUsurio === 'papel' && eleccionMaquina === 'piedra') || 
       (eleccionUsurio === 'tijera' && eleccionMaquina === 'papel') 
     ){
-      mostrarResultado (String='Has ganado')
+      mostrarResultado (String='Has ganado 👍')
       actualizarPuntuacion (puntosUsuario++)
   } else {
-      mostrarResultado (String='Has perdido')
+      mostrarResultado (String='Has perdido 👎')
       actualizarPuntuacion (puntosMaquina++)
   }
 }
 
 function mostrarResultado (String) {
-  resultados.innerHTML = String;
+  resultados.innerHTML = String;/* crear un cuadro donde vaya mostrando como cambia la elección de la maquina
+  <div id="resultados">
+    <p>Usaste <span class="" id="">papel🗞️</span><br> y la maquina usó <span class="" id="">piedra🪨</span></p>
+    <p>¡Ganaste 👍 un punto! 🔥</p>
+  </div>*/
 }
 
 function actualizarPuntuacion () { 
-  contadorUsuario.textContent = 'Puntos de la máquina: ' + puntosUsuario;
-  contadorMaquina.textContent = 'Tus puntos: ' + puntosMaquina;
+  contadorUsuario.textContent = '🧝' + puntosUsuario;
+  contadorMaquina.textContent = '🤖' + puntosMaquina;
 }

@@ -7,12 +7,27 @@
   <title>Piedra, papel, tijera</title>
 </head>
 <body>
-  <button class="boton-jugada" data-jugada="piedra">Piedra</button>
-  <button class="boton-jugada" data-jugada="papel">Papel</button>
-  <button class="boton-jugada" data-jugada="tijera">Tijera</button>
-  <div id="resultados"></div>
-  <p id="contador-usuario">Tus puntos: 0</p>
-  <p id="contador-ordenador">Puntos de la máquina: 0</p>
+  <header>
+    <h1 id="titulo">piedra, papel o tijera</h1>
+    <p id="subtitulo">con HTML, CSS y JS</p>
+    <div class="botones">
+      <button disabled>reiniciar</button>
+      <button disabled>cambiar idioma</button>
+    </div>
+  </header>
+  <main>
+    <p class="info" id="info">Elige una opción</p>
+    <div class="opciones">
+      <button class="boton-jugada" data-jugada="piedra">🪨</button>
+      <button class="boton-jugada" data-jugada="papel">🗞️</button>
+      <button class="boton-jugada" data-jugada="tijera">✂️</button>
+    </div>
+    <div id="resultados"></div>
+    <div class="contadores">
+      <p id="contador-usuario">🧝 0</p>
+      <p id="contador-ordenador">🤖 0</p>
+    </div>
+  </main>
   <script src="./js/script.js"></script>
 </body>
 </html>
